@@ -1,0 +1,99 @@
+div(ng-controller='recipeEditCtrl')
+    .row.top-buffer-20
+        .col-md-4
+            p
+                | {{recipeData.instructions[0].value}}
+    .row.col-sm-offset-1
+        form#recipeEdit.form-horizontal(novalidate)
+            .form-group
+                .row
+                    .col-md-6
+                        label(for='recipeName') Title
+                        input#recipeName.form-control(type='text', ng-model='recipeData.title', value='{{recipeData.title}}', required, maxlength="50")
+            .form-group
+                .row
+                    .col-md-6
+                        label(for='recipeCategory') Category
+                        .group-elements
+                            input#recipeCategory.form-control.backgroud-white(type='text', ng-model='recipeData.category', value='{{recipeData.category}}', required, readonly)
+                            span.input-group-addon(ng-click='openCategory()', style='width: 45px !important;')
+                                i.fa.fa-ellipsis-h
+            .form-group
+                .row
+                    .col-md-6
+                        label(for='recipeDescription') Description
+                        textarea#recipeDescription.form-control.lk-textarea(rows='4', cols='50', ng-model='recipeData.description', value='{{recipeData.description}}', required)
+            .form-group
+                .row
+                    .col-md-3
+                        label(for='preperationTime') Preperation Time
+                        .row
+                            .col-md-6
+                                input#preperationTime.form-control(type='text', ng-model='recipeData.prepTime', value='{{recipeData.prepTime}}')
+                            .col-md-6
+                                select#prepTimeUnits.form-control(ng-model='recipeData.prepTimeUnits', ng-options='choice as choice for choice in timeChoices', ng-change='fireChange()')
+                                    option(value='')
+                    .col-md-3
+                        label(for='cookTime') Cook Time
+                        .row
+                            .col-md-6
+                                input#cookTime.form-control(type='text', ng-model='recipeData.cookTime', value='{{recipeData.cookTime}}')
+                            .col-md-6
+                                select#prepTimeUnits.form-control(ng-model='recipeData.cookTimeUnits', ng-options='choice as choice for choice in timeChoices', ng-change='fireChange()')
+                                    option(value='')
+            .form-group
+                .row
+                    .col-md-1
+                        label(for='serves') Serves
+                        input#serves.form-control(type='text', ng-model='recipeData.serves', value='{{recipeData.serves}}')
+            .row
+                .col-md-6.no-padding
+                    hr.hr-1-black
+            div
+                .row
+                    .col-md-6.no-padding
+                        label Instructions
+            lk-row-groups(rows-data='recipeData.instructions')
+            .row
+                .col-md-6.no-padding
+                    hr.hr-1-black
+            div
+                .row
+                    .col-md-6.no-padding
+                        label Ingredients
+            lk-Ingredients(rows-data='recipeData.ingredients', choices='ingredientsUnits')
+            .row
+                .col-md-6.no-padding
+                    hr.hr-1-black
+            .form-group
+                .row
+                    .col-md-1
+                        label(for='recipePhoto') Photo
+                    .col-md-2
+                        button.btn.btn-microsoft(type='submit' ng-click="uploadPicture(recipeData)") Upload Picture
+                .row.top-buffer-20
+                    .col-md-4.thumbnail
+                        img(ng-src='{{croppedImageURL}}', width='200px', height='200px')
+            //.form-group
+            //    .row
+            //        .col-md-3
+            //            label(for='recipePhoto') Photo
+            //            input#recipePhoto.form-control(type='file', ng-model='recipeData.photo', value='{{recipeData.photo}}', lk-selected-file='selectedFile')
+            //    .row
+            //        .col-md-6
+            //            .cropArea
+            //                img-crop(image='myImage', result-image='myCroppedImage')
+            //    .row
+            //        .col-md-6 {{myCroppedImage}}
+            //            img(ng-src='{{myCroppedImage}}')
+            .form-group
+                .row
+                    .col-md-1
+                        button.btn.btn-default(type='submit' ng-click="save(recipeData)") Submit
+                    .col-md-1
+                        button.btn.btn-default(type='submit' ng-click="clear(recipeData)") Clear
+
+
+
+
+

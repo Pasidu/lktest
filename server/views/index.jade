@@ -1,0 +1,22 @@
+extends ../includes/layout
+
+block main-content
+    .navbar.navbar-inverse.navbar-fixed-top
+        .container
+            .navbar-header
+                a.navbar-brand(href="/") Lankan Recipe
+                    h6 -Be your own chef
+            //div(ng-include="'/partials/tabs/tabBar'")
+    section.content
+        div(ng-include="'/tabs/menu'")
+      section.content
+        .container(ng-controller="mainCtrl")
+            div(ng-view)
+
+
+    footer.container.text-center
+        p &copy; 2015 Lanka Recipe Ltd.  #{siteName}
+//block content
+//  h1= siteName
+//  p Welcome to #{siteName}
+//  p Welcome to #{siteName}

@@ -1,0 +1,60 @@
+.container(ng-controller='myKitchenCtrl')
+    .row.top-buffer-20
+        .col-md-5
+        .col-md-2
+                img.img-responsive.img-circle(src='https://graph.facebook.com/#{id}/picture?type=large', height='80px', width='80px')
+    .row.top-buffer-20
+        .col-md-4
+        .col-md-4
+            | Member since : #{memberSince}
+    .row
+        .col-md-4
+        .col-md-4
+            | Last login date : #{lastLoginDate}
+    .row
+        hr.hr-2-black
+    .row
+        .col-md-6.no-padding.right-padding-5
+            .row
+                #recipe-navbar-collapse-1.collapse.navbar-collapse
+                    ul.nav.navbar-nav
+                        li
+                            a(href="") My Recipe
+                        li
+                            a(href="/recipeEdit") Add Recipe
+                        li
+                            a(href="") Saved Recipe
+            .row.no-margin-hor
+                .curve-borders.left-right-padding-15.backgroud-grey
+                    .col-md-12.no-margin-hor.no-padding(ng-repeat='recipe in myRecipes')
+                        .row.no-margin-hor.top-padding-5.bottom-padding-5
+                            .col-md-3
+                                img(src='{{getImagePath(recipe.imageName)}}', width='60px')
+                            .col-md-6
+                                | {{recipe.title}} - {{recipe.description}}
+                                | Time - {{recipe.prepTime}} {{recipe.prepTimeUnits}}
+                            .col-md-3
+                                span.icon.edit(ng-click='edit(recipe)')
+                                    i.fa.fa-pencil-square-o
+                                span.icon.delete
+                                    i.fa.fa-trash(ng-click='delete(recipe)')
+                                span.icon.add
+                                    i.fa.fa-plus
+                        .row.no-margin-hor
+                            hr.hr-1-black
+        .col-md-6.no-padding.left-padding-5
+            .row
+                #Blog-navbar-collapse-1.collapse.navbar-collapse
+                    ul.nav.navbar-nav
+                        li
+                            a(href="") My Blog
+                        li
+                            a(href="/BlogEdit") Add Blog
+                        li
+                            a(href="") Bookmarked Blog
+            .row.no-margin-hor
+                .curve-borders.left-right-padding-15.backgroud-grey
+                    | TO BE DONE
+
+
+

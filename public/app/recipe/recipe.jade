@@ -1,0 +1,18 @@
+//
+   Created by Pasidu on 4/28/2015.
+.container(ng-controller="recipeCtrl")
+    .row.buffer-10
+    .row(ng-repeat="recipeRow in recipeMatrix")
+        .col-lg-4(ng-repeat='recipe in recipeRow')
+            a.thumbnail(ng-click='openRecipe(recipe)')
+                img(src='{{getImagePath(recipe.imageName)}}', width='300px')
+            .caption.text-center
+                h3
+                    {{recipe.title}}
+                p
+                    {{recipe.description}}
+
+
+
+
+

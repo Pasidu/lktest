@@ -1,0 +1,18 @@
+.form-group
+    .row
+        .col-md-6
+            .row
+                .col-md-2
+                    input#ingredientsQuantity.form-control(type='text', ng-model='data.quantity', value='{{data.quantity}}', required, maxlength="10")
+                .col-md-3
+                    select#units.form-control(ng-model='data.units', ng-options='choice as choice for choice in choices', ng-change='fireChange()')
+                        option(value='')
+                .col-md-7
+                    input#ingredientsDetails.form-control(type='text', ng-model='data.details', value='{{data.details}}', required, maxlength="50")
+        .col-md-3
+            span.icon.edit(ng-show="readonly")
+                i.fa.fa-pencil-square-o(ng-click="edit(data)")
+            span.icon.delete(ng-show="readonly")
+                i.fa.fa-trash(ng-click="delete(data)")
+            span.icon.add(ng-hide='readonly')
+                i.fa.fa-plus(ng-click="add(data)")

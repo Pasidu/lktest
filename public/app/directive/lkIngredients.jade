@@ -1,0 +1,13 @@
+div
+    .row
+        .col-md-6
+            .row
+                .col-md-2.no-padding
+                    label Quantity
+                .col-md-3
+                    label Units
+                .col-md-7
+                    label Details
+
+div(data-ng-repeat='rowData in rowsData' )
+    lk-Ingredient-row(data='rowData', choices='choices')

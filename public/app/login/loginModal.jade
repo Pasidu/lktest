@@ -1,0 +1,24 @@
+div.login-modal
+    .modal-header
+        h3.modal-title.text-center Login {{message}}
+    .modal-body
+        form#login.form-horizontal(novalidate)
+            .row
+                a.btn.btn-block.btn-social.btn-facebook(href='/auth/facebook', target='_self' )
+                    i.fa.fa-facebook
+                    | Sign in with Facebook
+
+            .row.text-center.buffer-10
+                |Or
+
+            .row
+                input#userName.form-control(type='text', ng-model='loginData.userName', value='{{loginData.userName}}', placeholder='User Name')
+            .row
+                input#password.form-control(type='password', ng-model='loginData.password', value='{{loginData.password}}', placeholder='Password')
+            .row.text-center.top-buffer-20
+                .col-md-5
+                    button.btn.btn-default.pull-right(type='submit' ng-click="login(loginData)") Login
+                .col-md-2
+                .col-md-5
+                    button.btn.btn-default(type='submit' ng-click="cancel()") Cancel
+

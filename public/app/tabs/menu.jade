@@ -1,0 +1,51 @@
+.container(ng-controller="menuCtrl")
+    nav.navbar.navbar-default
+        .container-fluid
+            // Brand and toggle get grouped for better mobile display
+            //.navbar-header
+            //    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            //        span.sr-only Toggle navigation
+            //        span.icon-bar
+            //        span.icon-bar
+            //        span.icon-bar
+            //    a.navbar-brand(href='#') Brand
+            // Collect the nav links, forms, and other content for toggling
+            #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                ul.nav.navbar-nav
+                    li(ng-repeat='menu in menu[0].menuItems')
+                        a(href="{{menu.path}}", ) {{menu.name}}
+                ul.nav.navbar-nav.navbar-right
+                if showLogin
+                    li.pull-right
+                        a(href='/logout',target='_self')
+                            | Log out
+                    li.pull-right
+                        a(href='/myKitchen')
+                            | My Kicthen
+                else
+                    li.pull-right
+                        a(ng-click='openLogin()')
+                            | Log in
+                    //li.active
+                    //    a(href="/partials/blog/blog") Blog
+                    //li
+                    //    a(href="/partials/tips/tips") Tips
+
+//.container(ng-controller="menuCtrl")
+//    nav.navbar.navbar-default
+//        .container-fluid
+//            // Brand and toggle get grouped for better mobile display
+//            //.navbar-header
+//            //    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-2')
+//            //        span.sr-only Toggle navigation
+//            //        span.icon-bar
+//            //        span.icon-bar
+//            //        span.icon-bar
+//            //    a.navbar-brand(href='#') Brand
+//            // Collect the nav links, forms, and other content for toggling
+//            #bs-example-navbar-collapse-2.collapse.navbar-collapse
+//                .btn-group
+//                    label.lrbtn.lrbtn-menu(ng-model='radioModel', btn-radio="'Left'", uncheckable='') Left
+//                    label.lrbtn.lrbtn-menu(ng-model='radioModel', btn-radio="'Middle'", uncheckable='') Middle
+//                    label.lrbtn.lrbtn-menu(ng-model='radioModel', btn-radio="'Right'", uncheckable='') Right
+

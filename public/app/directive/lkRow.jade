@@ -1,0 +1,12 @@
+.form-group
+    .row
+        .col-md-6
+            textarea#recipeInstructions.form-control.lk-textarea(rows='1', cols='50', ng-model='data.value', value='{{data.value}}')
+        .col-md-3
+            span.icon.edit(ng-show="readonly")
+                i.fa.fa-pencil-square-o(ng-click="edit(data)")
+            span.icon.delete(ng-show="readonly")
+                i.fa.fa-trash(ng-click="delete(data)")
+            span.icon.add(ng-hide='readonly')
+                i.fa.fa-plus(ng-click="add(data)")
+

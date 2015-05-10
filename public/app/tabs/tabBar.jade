@@ -1,0 +1,7 @@
+.navbar-left(ng-controller="tabBarCtrl")
+    p
+        button.btn.btn-default.btn-sm(ng-click='tabs[0].active = true') Select second tab
+        button.btn.btn-default.btn-sm(ng-click='tabs[1].active = true') Select third tab
+    tabset
+        tab(ng-repeat='tab in tabs', heading='{{tab.title}}', active='tab.active', disabled='tab.disabled')
+            {{tab.content}}
