@@ -26,7 +26,8 @@ module.exports = function (app, config) {
             app.get('/api/recipe/:id', recipeRepository.getRecipeById);
             app.get('/api/recipes/byUser', isLoggedIn, recipeRepository.getRecipeByUser);
             app.post('/api/recipe', isLoggedIn, recipeRepository.saveRecipe);
-            app.post('/api/recipePicture', isLoggedIn, recipeRepository.savePicture);
+            app.post('/api/recipe/deleteById', isLoggedIn, recipeRepository.deleteRecipeById);
+
             //https://graph.facebook.com/10153379071010962/picture
 
             app.get('/tabs/menu', function(req, res){
@@ -50,10 +51,60 @@ module.exports = function (app, config) {
     //FACEBOOK ROUTES
     app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect: '/',
-            failureRedirect: '/' }));
+    app.get('/auth/facebook/callback', passport.authenticate('facebook',
+                                                            {
+                                                                successRedirect: '/myKitchen',
+                                                                failureRedirect: '/'
+                                                            }));
+//    app.post('/signup',passport.authenticate(),
+//        function(req, res) {
+//            res.redirect('/users/' + req.user.username);
+//        }
+//    );
+//    app.post('/signup', passport.authenticate('local'),
+//        function(req, res) {
+//            res.redirect('/users/' + req.user.username);
+//        }
+//    );
+
+    app.post('/signup',   function(req, res, next) {
+        passport.authenticate('local-sign', function(err, user, info) {
+                                if (err) {
+                                    return next(err);
+                                }
+                                if (!user) {
+                                    return res.send({ errorCode : -1, message : info });
+                                }
+                                req.logIn(user, function(err) {
+                                    if (err) {
+                                        return next(err);
+                                    }
+                                    return res.send({ errorCode : 0});
+                                    //res.redirect('/myKitchen');
+                                });
+                            }
+        )(req, res, next);
+    });
+
+    app.post('/login',   function(req, res, next) {
+        passport.authenticate('local-login', function(err, user, info) {
+                if (err) {
+                    return next(err);
+                }
+                if (!user) {
+                    return res.send({ errorCode : -1, message : info });
+                }
+                req.logIn(user, function(err) {
+                    if (err) {
+                        return next(err);
+                    }
+                    return res.send({ errorCode : 0});
+                    //res.redirect('/myKitchen');
+                });
+            }
+        )(req, res, next);
+    });
+
 
     app.get('/logout', function(req, res) {
         req.logout();
@@ -65,9 +116,7 @@ module.exports = function (app, config) {
     });
 
     app.get('*', function(req, res) {
-        res.render('index', { siteName: "Lanka Recipe ssss"}
-        //    , {            bootstrappedUser: req.user        }
-        );
+        res.render('index');
     });
 };
 

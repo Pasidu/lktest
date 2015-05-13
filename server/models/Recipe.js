@@ -22,6 +22,7 @@ var recipeSchema = mongoose.Schema({
     createdOn: {type:Date},
     editedBy : {type: String},
     editedOn : {type: Date},
+    isActive : {type : Boolean, required: '{PATH} is required!' },
     tags: [String]
 });
 var Recipe = mongoose.model('Recipe', recipeSchema);

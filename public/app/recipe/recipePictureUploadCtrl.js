@@ -9,8 +9,6 @@ angular.module('app').controller('recipePictureUploadCtrl', ['$scope', '$modalIn
     }
 
     $scope.cancel = function(){
-        $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
-        };
+        $modalInstance.dismiss('cancel');
     }
 }]);

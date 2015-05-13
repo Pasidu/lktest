@@ -1,24 +1,48 @@
 div.login-modal
     .modal-header
-        h3.modal-title.text-center Login {{message}}
+        button.close.padding-right-5.margin-top-5(type='button', aria-label="Close", ng-click='cancel()')
+            span
+                | &times;
+        h3.modal-title.text-center
+            span(ng-show='signIn')
+                | Sign In
+            span(ng-hide='signIn')
+                | Sign Up
     .modal-body
+        {{message}}
         form#login.form-horizontal(novalidate)
-            .row
-                a.btn.btn-block.btn-social.btn-facebook(href='/auth/facebook', target='_self' )
-                    i.fa.fa-facebook
-                    | Sign in with Facebook
+            .container(ng-show='signIn')
+                .row
+                    a.btn.btn-block.btn-social.btn-facebook(href='/auth/facebook', target='_self' )
+                        i.fa.fa-facebook
+                        | Sign in with Facebook
+                .row.padding-top-5.padding-bottom-5
+                    h4.text-center
+                        | or
+                .row
+                    .container
+                        .row
+                            input#signInEmail.form-control(type='text', ng-model='signInData.email', value='{{signInData.email}}', placeholder='Email')
+                        .row.margin-top-5
+                            input#signInPassword.form-control(type='password', ng-model='signInData.password', value='{{signInData.password}}', placeholder='Password')
+                        .row.margin-top-10
+                            a.btn.btn-block.btn-social.btn-vk(ng-click='login()')
+                                i.fa.fa-sign-in
+                                | Sign in
+                        .row.margin-top-20
+                            a(ng-click='signIn=false')
+                                | Don't have an Account yet, Sign Up
+            .container(ng-hide='signIn')
+                .row
+                    input#signUpUserName.form-control(type='text', ng-model='signUpData.email', value='{{signUpData.email}}', placeholder='Email')
+                .row.margin-top-5
+                    input#signUpPassword.form-control(type='password', ng-model='signUpData.password', value='{{signUpData.password}}', placeholder='Password')
+                .row.margin-top-10
+                    a.btn.btn-block.btn-social.btn-reddit(ng-click='signUp()')
+                        i.fa.fa-user-plus
+                        |Sign up
+                .row.margin-top-20
+                    a(ng-click='signIn=true')
+                        | Already a memeber? Sign In
 
-            .row.text-center.buffer-10
-                |Or
-
-            .row
-                input#userName.form-control(type='text', ng-model='loginData.userName', value='{{loginData.userName}}', placeholder='User Name')
-            .row
-                input#password.form-control(type='password', ng-model='loginData.password', value='{{loginData.password}}', placeholder='Password')
-            .row.text-center.top-buffer-20
-                .col-md-5
-                    button.btn.btn-default.pull-right(type='submit' ng-click="login(loginData)") Login
-                .col-md-2
-                .col-md-5
-                    button.btn.btn-default(type='submit' ng-click="cancel()") Cancel
 

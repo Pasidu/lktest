@@ -8,25 +8,42 @@ app.directive('lkRowGroups', [ function () {
         templateUrl: function (elem, attr) {
             return '/partials/directive/lkRowGroup';
         },
-        controller: function ($scope) {
-            if ($scope.rowsData == undefined) {
-                $scope.rowsData = [ {id : 1, value : ''}];
-            }
-            this.addRow = function (data) {
-                var lastElement = $scope.rowsData[$scope.rowsData.length-1];
-                if(lastElement.value != "")
-                    $scope.rowsData.push({id: lastElement.id+1, value : ''});
+        controller: function ($scope, $timeout) {
+            $scope.newInstruction = '';
+
+            $scope.enter = function(data, textAreaId){
+                data.editMode = true;
+                $timeout(function() {
+                    var element = document.getElementById(textAreaId);
+                    if(element)
+                        element.focus();
+                });
             };
-            this.deleteRow = function(data){
-                var index = -1;
-                var i=0;
-                for(; i< $scope.rowsData.length; i++){
-                    if($scope.rowsData[i].id == data.id){
-                        index = i;
-                    }
+
+            $scope.leave = function(data){
+                $timeout(function() {
+                    data.editMode = false;
+                }, 200);
+            };
+
+            $scope.keyPress = function(event, data){
+                if(event.keyCode == 13){
+                    $scope.leave(data);
                 }
-                if (index > -1) {
-                    $scope.rowsData.splice(index, 1);
+            };
+
+            $scope.delete = function(index){
+                $scope.rowsData.splice(index, 1);
+            };
+
+
+            $scope.addNewInstruction = function(event){
+                if((event == undefined || event.keyCode == 13)&& $scope.newInstruction != '' ){
+                    if($scope.rowsData == undefined){
+                        $scope.rowsData = [];
+                    }
+                    $scope.rowsData.push({value : $scope.newInstruction});
+                    $scope.newInstruction = '';
                 }
             }
         }

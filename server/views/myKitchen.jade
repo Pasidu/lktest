@@ -1,9 +1,9 @@
 .container(ng-controller='myKitchenCtrl')
-    .row.top-buffer-20
+    .row.margin-top-20
         .col-md-5
         .col-md-2
                 img.img-responsive.img-circle(src='https://graph.facebook.com/#{id}/picture?type=large', height='80px', width='80px')
-    .row.top-buffer-20
+    .row.margin-top-20
         .col-md-4
         .col-md-4
             | Member since : #{memberSince}
@@ -14,7 +14,7 @@
     .row
         hr.hr-2-black
     .row
-        .col-md-6.no-padding.right-padding-5
+        .col-md-6.no-padding.padding-right-5
             .row
                 #recipe-navbar-collapse-1.collapse.navbar-collapse
                     ul.nav.navbar-nav
@@ -25,9 +25,9 @@
                         li
                             a(href="") Saved Recipe
             .row.no-margin-hor
-                .curve-borders.left-right-padding-15.backgroud-grey
+                .curve-borders.padding-left-right-15.backgroud-grey
                     .col-md-12.no-margin-hor.no-padding(ng-repeat='recipe in myRecipes')
-                        .row.no-margin-hor.top-padding-5.bottom-padding-5
+                        .row.no-margin-hor.padding-top-5.padding-bottom-5
                             .col-md-3
                                 img(src='{{getImagePath(recipe.imageName)}}', width='60px')
                             .col-md-6
@@ -38,11 +38,9 @@
                                     i.fa.fa-pencil-square-o
                                 span.icon.delete
                                     i.fa.fa-trash(ng-click='delete(recipe)')
-                                span.icon.add
-                                    i.fa.fa-plus
                         .row.no-margin-hor
                             hr.hr-1-black
-        .col-md-6.no-padding.left-padding-5
+        .col-md-6.no-padding.padding-left-5
             .row
                 #Blog-navbar-collapse-1.collapse.navbar-collapse
                     ul.nav.navbar-nav
@@ -53,7 +51,7 @@
                         li
                             a(href="") Bookmarked Blog
             .row.no-margin-hor
-                .curve-borders.left-right-padding-15.backgroud-grey
+                .curve-borders.padding-left-right-15.backgroud-grey
                     | TO BE DONE
 
 

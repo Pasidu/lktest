@@ -52,7 +52,7 @@ crop.service('cropEXIF', [function() {
       0x9207 : "MeteringMode",            // Metering mode
       0x9208 : "LightSource",             // Kind of light source
       0x9209 : "Flash",                   // Flash status
-      0x9214 : "SubjectArea",             // Location and area of main subject
+      0x9214 : "SubjectArea",             // Location and area of home subject
       0x920A : "FocalLength",             // Focal length of the lens in mm
       0xA20B : "FlashEnergy",             // Strobe energy in BCPS
       0xA20C : "SpatialFrequencyResponse",    //

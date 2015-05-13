@@ -7,6 +7,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User            = require('../models/User');
 var configAuth = require('./facebookAuth');
+var encrypt = require('../utilities/encryption');
 
 module.exports = function() {
 
@@ -22,22 +23,23 @@ module.exports = function() {
     });
 
 
-    passport.use('local-signup', new LocalStrategy({
+    passport.use('local-sign', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true
         },
         function(req, email, password, done){
-            process.nextTick(function(){
+            //process.nextTick(function(){
                 User.findOne({'local.username': email}, function(err, user){
                     if(err)
                         return done(err);
                     if(user){
-                        return done(null, false, req.flash('signupMessage', 'That email already taken'));
+                        return done(null, false, "User already exists.");
                     } else {
                         var newUser = new User();
                         newUser.local.username = email;
-                        newUser.local.password = newUser.generateHash(password);
+                        newUser.local.salt = encrypt.createSalt();
+                        newUser.local.password = encrypt.hashPwd(newUser.local.salt, password);
 
                         newUser.save(function(err){
                             if(err)
@@ -47,7 +49,7 @@ module.exports = function() {
                     }
                 })
 
-            });
+           // });
         }));
 
     passport.use('local-login', new LocalStrategy({
@@ -56,19 +58,19 @@ module.exports = function() {
             passReqToCallback: true
         },
         function(req, email, password, done){
-            process.nextTick(function(){
+            //process.nextTick(function(){
                 User.findOne({ 'local.username': email}, function(err, user){
                     if(err)
                         return done(err);
                     if(!user)
-                        return done(null, false, req.flash('loginMessage', 'No User found'));
-                    if(!user.validPassword(password)){
-                        return done(null, false, req.flash('loginMessage', 'invalid password'));
+                        return done(null, false, "Invalid username.");
+                    if(user &&  user.authenticate(password)){
+                        return done(null, user);
                     }
-                    return done(null, user);
+                    return done(null, false, "Incorrect Password.");
 
                 });
-            });
+            //});
         }
     ));
 

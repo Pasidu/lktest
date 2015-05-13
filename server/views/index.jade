@@ -1,21 +1,22 @@
 extends ../includes/layout
 
 block main-content
-    .navbar.navbar-inverse.navbar-fixed-top
-        .container
-            .navbar-header
-                a.navbar-brand(href="/") Lankan Recipe
-                    h6 -Be your own chef
-            //div(ng-include="'/partials/tabs/tabBar'")
-    section.content
-        div(ng-include="'/tabs/menu'")
-      section.content
-        .container(ng-controller="mainCtrl")
-            div(ng-view)
+    div(ng-controller="mainCtrl")
+        .navbar.navbar-inverse.navbar-fixed-top
+            .container
+                .navbar-header
+                    a.navbar-brand(href="/") Lankan Recipe
+                        h6 -Be your own chef
+                //div(ng-include="'/partials/tabs/tabBar'")
+        section.content
+            div(ng-include="menuUrl")
+          section.content
+            .container(ng-controller="homeCtrl")
+                div(ng-view)
 
 
     footer.container.text-center
-        p &copy; 2015 Lanka Recipe Ltd.  #{siteName}
+        p &copy; 2015 Lanka Recipe Ltd.
 //block content
 //  h1= siteName
 //  p Welcome to #{siteName}

@@ -1,0 +1,25 @@
+div.login-modal
+    .modal-header
+        h3.modal-title Select Recipe Category
+    .modal-body
+        .container
+            form#recipeCategory.form-horizontal(novalidate)
+                .form-group
+                    .row.input-sm.no-padding
+                        .col-md-6
+                            .checkbox(ng-repeat="timebase in TimeBaseCategories")
+                                label
+                                    input(type='checkbox', name='', value='timebase.value', ng-model='timebase.selected')
+                                    | {{timebase.value}}
+                        .col-md-6
+                            .checkbox(ng-repeat="normal in NormalCategories")
+                                label
+                                    input(type='checkbox', name='', value='normal.value', ng-model='normal.selected')
+                                    | {{normal.value}}
+                .form-group
+                    .row.margin-top-20
+                        .row
+                            .col-md-1.col-md-offset-1
+                                button.btn.btn-default(type='submit' ng-click="done()") OK
+                            .col-md-1.col-md-offset-1
+                                button.btn.btn-default(type='submit' ng-click="cancel()") Cancel

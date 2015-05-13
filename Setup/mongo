@@ -1,0 +1,3 @@
+update multiple files
+
+lankarecipes.recipes.update({}, {$set : {isActive : true}}, {multi : true})

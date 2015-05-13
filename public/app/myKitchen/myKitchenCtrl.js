@@ -24,7 +24,11 @@ angular.module('app').controller('myKitchenCtrl', ['$scope', '$http', '$location
     };
 
     $scope.delete = function(recipe){
-        alert("Are you sure?");
+        $http.post('/api/recipe/deleteById',recipe ).success(function (result) {
+            init();
+        }).error(function (errorData) {
+            $scope.errorMessage = errorData;
+        });
     };
     var init = function(){
         $http.get('/api/recipes/byUser').success(function (result) {

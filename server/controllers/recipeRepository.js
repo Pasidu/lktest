@@ -6,13 +6,13 @@ var fs = require('fs')
 var config = require('../config/config');
 
 exports.getRecipes = function(req, res) {
-    Recipe.find({}).exec(function(err, collection) {
+    Recipe.find({isActive : true}).exec(function(err, collection) {
         res.send(collection);
     })
 };
 
 exports.getRecipeById = function(req, res) {
-    Recipe.findOne({_id:req.params.id}).exec(function(err, recipe) {
+    Recipe.findOne({_id:req.params.id, isActive : true}).exec(function(err, recipe) {
         res.send(recipe);
     })
 };
@@ -20,16 +20,19 @@ exports.getRecipeById = function(req, res) {
 exports.saveRecipe = function(req, res, next){
     var recipeData = req.body.recipeData;
     var dataURL = req.body.image;
-    var regex = /^data:.+\/(.+);base64,(.*)$/;
-    var matches = dataURL.match(regex);
-    if(matches != undefined){
-        var ext = matches[1];
-        var data = matches[2];
-        var buffer = new Buffer(data, 'base64');
-        var fileName =  Date.now() +req.user.id +'.' + ext;
-        fs.writeFileSync(config.imagesPath + fileName, buffer);
-        recipeData.imageName = fileName;
+    if(dataURL != undefined){
+        var regex = /^data:.+\/(.+);base64,(.*)$/;
+        var matches = dataURL.match(regex);
+        if(matches != undefined){
+            var ext = matches[1];
+            var data = matches[2];
+            var buffer = new Buffer(data, 'base64');
+            var fileName =  Date.now() +req.user.id +'.' + ext;
+            fs.writeFileSync(config.imagesPath + fileName, buffer);
+            recipeData.imageName = fileName;
+        }
     }
+
 
     var currentTime = Date.now();
     if(recipeData._id == undefined){
@@ -37,7 +40,7 @@ exports.saveRecipe = function(req, res, next){
         recipeData.createdOn = currentTime;
         recipeData.editedBy = req.user.id;
         recipeData.editedOn = currentTime;
-
+        recipeData.isActive = true;
         Recipe.create(recipeData, function(err, data){
             if(err){
                 res.status(400);
@@ -64,15 +67,23 @@ exports.saveRecipe = function(req, res, next){
 };
 
 exports.getRecipeByUser = function(req, res){
-    Recipe.find({createdBy : req.user.id}).exec(function(err, collection) {
+    Recipe.find({createdBy : req.user.id, isActive : true}).exec(function(err, collection) {
         res.send(collection);
     })
 };
 
-exports.savePicture = function(req, res, next) {
+exports.deleteRecipeById = function(req, res, next) {
     var recipeData = req.body;
-    Recipe.create(recipeData, function (err, data) {
-        if (err) {
+    recipeData.editedBy = req.user.id;
+    recipeData.editedOn = Date.now();
+    recipeData.isActive = false;
+
+    Recipe.findByIdAndUpdate(recipeData._id, recipeData, function(err){
+        if(err){
+            res.status(400);
+            return res.send({reason:err.toString()});
         }
+        res.status(200);
+        return res.send({message:'update successful'});
     });
 };

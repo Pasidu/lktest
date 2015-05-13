@@ -16,6 +16,10 @@ angular.module('app').controller('recipeEditCtrl', ['$scope', '$http', '$locatio
         });
     };
 
+    $scope.clear = function(){
+        $location.path('/myKitchen');
+    }
+
     $scope.load = function(){
         var reader = new FileReader();
         reader.onload = function (evt) {
@@ -26,7 +30,7 @@ angular.module('app').controller('recipeEditCtrl', ['$scope', '$http', '$locatio
         reader.readAsDataURL($scope.selectedFile);
     };
 
-    $scope.uploadPicture = function(){
+    $scope.uploadPictures = function(){
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
             templateUrl: '/partials/recipe/recipePictureUpload',
@@ -49,13 +53,13 @@ angular.module('app').controller('recipeEditCtrl', ['$scope', '$http', '$locatio
             windowClass: 'category-modal-window',
             resolve: {
                 categories: function () {
-                    return $scope.categories;
+                    return $scope.recipeData.categories;
                 }
             }
         });
 
         modalInstance.result.then(function (result) {
-            $scope.categories = result;
+            $scope.recipeData.categories = result;
         }, function () {
 
         });

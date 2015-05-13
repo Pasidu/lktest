@@ -9,7 +9,7 @@ div.login-modal
                         label(for='recipePhoto') Select Image
                     .col-lg-4
                         input#recipePhoto.form-control(type='file', lk-selected='selectedFile')
-                .row.top-buffer-20
+                .row.margin-top-20
                     .col-md-6
                         .cropArea
                             img-crop(image='selectedFile.DataURL', result-image='croppedImage')
@@ -17,7 +17,7 @@ div.login-modal
                     .col-md-5
                         img(ng-src='{{croppedImage}}')
 
-                .row.top-buffer-20
+                .row.margin-top-20
                     .col-md-5
                         button.btn.btn-default.pull-right(type='submit' ng-click="done()") OK
                     .col-md-2

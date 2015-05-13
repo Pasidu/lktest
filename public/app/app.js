@@ -12,13 +12,13 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
 
     $locationProvider.html5Mode(true);
      $routeProvider
-         .when('/', { templateUrl: '/partials/main/main', controller: 'mvMainCtrl'})
-         .when('/Recipe', { templateUrl: '/partials/recipe/recipe'})
-        .when('/Blog', { templateUrl: '/partials/blog/blog'})
-         .when('/Tips', { templateUrl: '/partials/tips/tips'})
-         .when('/recipeEdit', { templateUrl: '/partials/recipe/recipeEdit', controller: 'recipeEditCtrl'})
-         .when('/recipeDetail', { templateUrl: '/partials/recipe/recipeDetail'})
-         .when('/myKitchen', { templateUrl: '/account'})
+         .when('/', { templateUrl: '/partials/home/home?Id' + Date.now()})
+         .when('/Recipe', { templateUrl: '/partials/recipe/recipe?Id' + Date.now()})
+         .when('/Blog', { templateUrl: '/partials/blog/blog?Id' + Date.now()})
+         .when('/Tips', { templateUrl: '/partials/tips/tips?Id' + Date.now()})
+         .when('/recipeEdit', { templateUrl: '/partials/recipe/recipeEdit?Id' + Date.now(), controller: 'recipeEditCtrl'})
+         .when('/recipeDetail', { templateUrl: '/partials/recipe/recipeDetail?Id' + Date.now()})
+         .when('/myKitchen', { templateUrl: '/account?Id' + Date.now()})
 
 });
 

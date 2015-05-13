@@ -1,13 +1,48 @@
-div
-    .row
-        .col-md-6
-            .row
-                .col-md-2.no-padding
-                    label Quantity
-                .col-md-3
-                    label Units
-                .col-md-7
-                    label Details
+.row
+    .col-md-9
+        .row.margin-top-bottom-5(data-ng-repeat='rowData in rowsData')
+            .col-md-1.no-padding(style = 'width :20px; padding-right:5px;').text-right
+                //i.fa.fa-circle.fa-1
+            .col-md-8.no-padding(ng-hide='rowData.editMode')
+                p(ng-click="enter(rowData, 'quantity'+$index)")
+                    |{{rowData.quantity}}{{rowData.units}} {{rowData.details}}
+            fieldset(ng-show='rowData.editMode', ng-blur='leave(rowData)')
+                .col-md-1.no-padding.padding-left-5
+                    input.form-control.input-sm( id='quantity'+'{{$index}}' ,type='text', ng-model='rowData.quantity', value='{{rowData.quantity}}',  )
+                .col-md-1.no-padding.padding-left-5
+                    select#units.form-control.input-sm(ng-model='rowData.units', ng-options='choice as choice for choice in choices' )
+                .col-md-6.no-padding.padding-left-5
+                    input#details.form-control.input-sm(type='text', ng-model='rowData.details', value='{{rowData.details}}', required, maxlength="50" )
+            .col-md-3
+                span.icon.delete(ng-hide='rowData.editMode')
+                    i.fa.fa-trash(ng-click="delete($index)")
+                span.icon.add(ng-show='rowData.editMode')
+                    i.fa.fa-plus(ng-click="rowData.editMode=!validate(rowData)")
+        .row
+            .col-md-1.no-padding(style = 'width :20px; padding-right:5px;').text-right
+            .col-md-1.no-padding.padding-left-5
+                label Quantity
+                input#ingredientsQuantity.form-control.input-sm(type='text', ng-model='newIngredient.quantity', value='{{newIngredient.quantity}}', required, maxlength="10")
+            .col-md-1.no-padding.padding-left-5
+                label Units
+                select#units.form-control.input-sm(ng-model='newIngredient.units', ng-options='choice as choice for choice in choices')
+                    option(value='')
+            .col-md-6.no-padding.padding-left-5
+                label Details
+                input#ingredientsDetails.form-control.input-sm(type='text', ng-model='newIngredient.details', value='{{newIngredient.details}}', required, maxlength="50")
+            .col-md-3(style='padding-top: 25px;')
+                span.icon.add
+                    i.fa.fa-plus(ng-click='addNew(newIngredient)')
 
-div(data-ng-repeat='rowData in rowsData' )
-    lk-Ingredient-row(data='rowData', choices='choices')
+//.row
+//    .col-md-9
+//        .row.buffer-5
+//            .col-md-2.no-padding
+//                label Quantity
+//            .col-md-3
+//                label Units
+//            .col-md-7
+//                label Details
+
+//div(data-ng-repeat='rowData in rowsData' )
+//    lk-Ingredient-row(data='rowData', choices='choices')

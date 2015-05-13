@@ -81,23 +81,15 @@ footer p {
     border-color: #11866f
 }
 
-.top-buffer-20 {
-    margin-top: 20px;
-}
-.buffer-10 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.buffer-5 {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
 .login-modal-window .modal-dialog {
     width: 300px;
     height: 500px;
 }
 
+.login-modal-window .modal-header {
+    padding: 5px;
+    background-color: rgba(103, 205, 93, 0.54);
+}
 .upload-modal-window .modal-dialog {
     width: 1000px;
     height: 500px;
@@ -134,14 +126,14 @@ footer p {
     padding: 0px;
 }
 
-.left-padding-5{
-    padding-left: 5px;
+.padding-left-5 {
+    padding-left: 5px !important;
 }
 
-.right-padding-5{
-    padding-right: 5px;
+.padding-right-5 {
+    padding-right: 5px !important;
 }
-.left-right-padding-15{
+.padding-left-right-15 {
      padding-left: 15px;
      padding-right: 15px;
 }
@@ -150,14 +142,39 @@ footer p {
     padding-bottom: 15px;
 }
 
-.top-padding-5{
-    padding-top: 15px;
+.padding-10{
+    padding: 10px !important;
 }
-.bottom-padding-5{
+
+.padding-top-5 {
+    padding-top: 5px;
+}
+.padding-bottom-5 {
     padding-bottom: 5px;
 }
 .curve-borders {
     border-radius: 6px
+}
+
+
+.margin-top-20 {
+    margin-top: 20px !important;
+}
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.margin-top-5 {
+    margin-top: 5px !important;
+}
+
+.margin-top-bottom-10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.margin-top-bottom-5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .no-margin-hor {

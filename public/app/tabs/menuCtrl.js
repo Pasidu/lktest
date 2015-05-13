@@ -46,6 +46,8 @@ angular.module('app').controller('menuCtrl', ['$scope', '$http', '$modal','$log'
 
 
 angular.module('app').controller('loginCtrl', ['$scope', '$modalInstance', '$http', function($scope, $modalInstance, $http){
+        $scope.signIn = true;
+
         $scope.ok = function () {
             $modalInstance.close($scope.selected.item);
         };
