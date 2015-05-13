@@ -1,5 +1,0 @@
-git remote add githublk https://github.com/Pasidu/lktest.git
-
-git remote
-
-git push -u githublk master
